@@ -12,11 +12,12 @@ import java.util.Random;
 public class EmailService {
 
     private final RedisService redisService;
-    private  JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
 
     @Autowired
-    public EmailService(RedisService redisService) {
+    public EmailService(RedisService redisService, JavaMailSender mailSender) {
         this.redisService = redisService;
+        this.mailSender = mailSender;
     }
 
     /* 이메일 인증 코드 발송 */
@@ -26,9 +27,9 @@ public class EmailService {
         message.setTo(userEmail);
         message.setFrom(EmailConstants.SMTP_ADDRESS);
         message.setSubject(EmailConstants.SMTP_EMAIL_CHECK_TITLE_MESSAGE);
-        message.setText(EmailConstants.SMTP_EMAIL_CHECK_TITLE_MESSAGE.replaceAll("\\$key", key));
-        redisService.setDataExpire(userEmail,key,60 * 3L);
+        message.setText(EmailConstants.SMTP_EMAIL_CHECK_MESSAGE.replaceAll("\\$key", key));
         mailSender.send(message);
+        redisService.setDataExpire(userEmail,key,60 * 3L);
     }
 
     /* 인증번호 만들기 */

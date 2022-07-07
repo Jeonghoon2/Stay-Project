@@ -11,11 +11,12 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class UserService {
-
+    final RedisService redisService;
     final UserMapper userMapper;
 
     @Autowired
-    public UserService(UserMapper userMapper) {
+    public UserService(RedisService redisService, UserMapper userMapper) {
+        this.redisService = redisService;
         this.userMapper = userMapper;
     }
 
