@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.userservice.mapper.UserMapper">
+
+    <resultMap type="com.example.userservice.dto.UserDto"
+               id="userInfo" >
+        <result property="userUuid" column="user_uuid"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userName" column="user_name"/>
+        <result property="userProfileImage" column="user_profile_image"/>
+        <result property="userNickName" column="user_nick_name"/>
+        <result property="userBirth" column="user_birth"/>
+    </resultMap>
+
+    <insert id="userRegister" parameterType="com.example.userservice.dto.UserDto">
+        INSERT INTO user (user_uuid,
+                          user_email,
+                          user_password,
+                          user_name,
+                          user_profile_image,
+                          user_nick_name,
+                          user_birth
+                          )
+        values (#{userUuid},
+                #{userEmail},
+                #{userPassword},
+                #{userName},
+                #{userProfileImage},
+                #{userNickName},
+                #{userBirth}
+                )
+    </insert>
+
+    <select id="registerEmailCheck" resultMap="userInfo">
+        select *
+        from user
+        where user_email = #{userEmail}
+    </select>
+
+    <select id="registerNickNameCheck" resultMap="userInfo">
+        select *
+        from user
+        where user_nick_name = #{userNickName}
+    </select>
+
+</mapper>
