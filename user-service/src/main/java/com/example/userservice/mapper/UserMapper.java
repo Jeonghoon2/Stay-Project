@@ -12,4 +12,6 @@ public interface UserMapper {
     UserDto registerEmailCheck(String email);
 
     UserDto registerNickNameCheck(String nickName);
+
+    UserDto findByEmail(String email);
 }

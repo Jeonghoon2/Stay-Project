@@ -4,6 +4,7 @@ import com.example.userservice.dto.UserDto;
 import com.example.userservice.service.EmailService;
 import com.example.userservice.service.RedisService;
 import com.example.userservice.service.UserService;
+import com.example.userservice.vo.RequestLogin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/user-service")
+@RequestMapping("")
 @Slf4j
 public class UserController {
 
@@ -62,6 +63,7 @@ public class UserController {
     public ResponseEntity emailCheck(@PathVariable("email") String email,
                                      @PathVariable("code") String code){
         String valueKey = redisService.getData(email);
+        if (valueKey == null) return ResponseEntity.status(HttpStatus.OK).body("인증코드 유효기간이 만료 되었습니다.");
         log.info(valueKey);
         if (Integer.parseInt(valueKey) == Integer.parseInt(code)){
             redisService.deleteData(email);

@@ -5,7 +5,10 @@ spring:
   application:
     name: user-service
 
-
+mybatis:
+  type-aliases-package: com.example.mappertut.model
+  mapper-locations: mybatis-mapper/*.xml
+  configuration.map-underscore-to-camel-case: true
 
 
 

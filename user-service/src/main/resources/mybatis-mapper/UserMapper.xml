@@ -47,4 +47,10 @@
         where user_nick_name = #{userNickName}
     </select>
 
+    <select id="findByEmail" resultMap="userInfo">
+        select *
+        from user
+        where user_email = #{userEmail}
+    </select>
+
 </mapper>
