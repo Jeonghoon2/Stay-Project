@@ -36,7 +36,7 @@
     </insert>
 
     <select id="registerEmailCheck" resultMap="userInfo">
-        select *
+        select if(user_email is null, true, false)
         from user
         where user_email = #{userEmail}
     </select>
