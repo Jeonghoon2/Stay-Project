@@ -1,13 +1,3 @@
-server:
-  port: 8000
-  address: localhost
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
 spring:
   application:
     name: apigateway-serivce
@@ -48,3 +38,4 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
