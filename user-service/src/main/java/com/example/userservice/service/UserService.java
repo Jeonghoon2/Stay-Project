@@ -45,6 +45,7 @@ public class UserService implements UserDetailsService {
         return userMapper.registerNickNameCheck(nickName);
     }
 
+    /* 로그인을 위한 User를 새롭게 Builder */
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         UserDto userDto = userMapper.findByEmail(userEmail);
@@ -54,6 +55,11 @@ public class UserService implements UserDetailsService {
         return new User(userDto.getUserEmail(), userDto.getUserPassword(),
                 true,true,true,true,
                 new ArrayList<>());
+    }
+
+    /* 이메일을 통해서 유저 상세 정보 불러오기 */
+    public UserDto loadByUserId(String userEmail){
+        return userMapper.findByEmail(userEmail);
     }
 
 }
