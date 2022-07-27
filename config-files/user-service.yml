@@ -31,7 +31,11 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://220.81.42.179:8761/eureka
 
 secret_settings:
   address: ukidd12@naver.com
+
+token:
+  expiration_time: 86400000
+  secret: user_token
