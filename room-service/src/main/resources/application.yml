@@ -1,0 +1,11 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: room-serivce
+
+mybatis:
+  type-aliases-package: com.example.mappertut.model
+  mapper-locations: mybatis-mapper/*.xml
+  configuration.map-underscore-to-camel-case: true
